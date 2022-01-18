@@ -1,11 +1,11 @@
 const router = require('express').Router()
-const { User } = require('../models')
+const { User, Thought } = require('../models')
 const passport = require('passport')
 const jwt = require('jsonwebtoken')
 
 // Register user
 router.post('/users/register', (req, res) => {
-  const { name, username } = req.body
+  const { username, email } = req.body
   User.register(new User({ username, email }), req.body.password, err => {
     if (err) { console.log(err) }
     res.sendStatus(200)
@@ -26,13 +26,13 @@ router.get('/users/profile', passport.authenticate('jwt'), (req, res) => res.jso
 
 // get all users
 router.get('/users', passport.authenticate('jwt'), async function (req, res) {
-  const user = await User.find({}).populate('post')
+  const user = await User.find({}).populate('thought')
   res.json(user)
 })
 
 // get one users
 router.get('/users/:id', passport.authenticate('jwt'), async function (req, res) {
-  const user = await User.findById(req.params.id).populate('post')
+  const user = await User.findById(req.params.id).populate('thought')
   res.json(user)
 })
 
@@ -49,17 +49,17 @@ router.delete('/users/:id', passport.authenticate('jwt'), async function (req, r
 })
 
 // add a friend
-router.delete('/users/users/:id/friend/:friendId', passport.authenticate('jwt'), async function (req, res) {
+router.post('/user/:userId/friend/:friendId', passport.authenticate('jwt'), async function (req, res) {
   const friend = await User.findByIdAndUpdate(req.params.userId, { $addToSet: { friends: req.params.friendId } })
-  const friend2 = await User.findByIdAndUpdate(req.params.userId, { $addToSet: { friends: req.params.userId } })
+  const friend2 = await User.findByIdAndUpdate(req.params.friendId, { $addToSet: { friends: req.params.userId } })
   res.sendStatus(200)
 })
 
 
 // delete a friend
-router.delete('/users/users/:id/friend/:friendId', passport.authenticate('jwt'), async function (req, res) {
+router.delete('/user/:userId/friend/:friendId', passport.authenticate('jwt'), async function (req, res) {
   const friend = await User.findByIdAndUpdate(req.params.userId, {$pull: {friends:req.params.friendId}})
-  const friend2 = await User.findByIdAndUpdate(req.params.userId, { $pull: { friends: req.params.userId } })
+  const friend2 = await User.findByIdAndUpdate(req.params.friendId, { $pull: { friends: req.params.userId } })
   res.sendStatus(200)
 })
 

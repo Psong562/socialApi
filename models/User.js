@@ -11,11 +11,12 @@ const User = new Schema({
     type: String,
     required: true,
     unique: true,
-    match: [/.+@.+\..+/, 'Must be Valid Email adress'],
+    trim: true,
+    match: [/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/, 'Must be Valid Email adress'],
   },
-  posts: [{
+  thought: [{
     type: Schema.Types.ObjectId,
-    ref: 'post'
+    ref: 'thought'
   }],
   notes: [{
     type: Schema.Types.ObjectId,

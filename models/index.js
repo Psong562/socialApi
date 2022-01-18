@@ -1,5 +1,5 @@
 module.exports = {
   User: require('./User.js'),
-  Post: require('./Post.js'),
-  Note: require('./Notes')
+  Thought: require('./Thought.js'),
+  Note: require('./Note')
 }

@@ -12,9 +12,9 @@ const Note = new Schema({
     ref: 'user',
     required: true
   },
-  post: {
+  thought: {
     type: Schema.Types.ObjectId,
-    ref: 'post',
+    ref: 'thought',
     required: true
   },
 }, {timestamps: true})

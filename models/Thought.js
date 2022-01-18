@@ -1,10 +1,10 @@
 const { Schema, model } = require('mongoose')
 
-const Post = new Schema({
+const Thought = new Schema({
   body: {
     type: String,
     required: 'Cannot leave post empty',
-    minlength: 1;
+    minlength: 1,
     maxlength: 300
   },
   user: {
@@ -18,4 +18,4 @@ const Post = new Schema({
   }],
 }, { timestamps: true })
 
-module.exports = model('post', Post)
+module.exports = model('thought', Thought)
