@@ -11,7 +11,7 @@
   ## Description
 
   Social Api back end with the ability to have thoughts and notes(reactions) to others thoughts and the add a friend feature.
-  Check it out here : https://watch.screencastify.com/v/yyczCtKsP1Ki42oXyMC1
+  Check it out here : https://drive.google.com/file/d/1BcZVSYefwEo5bYbX1maYO76q5IaPkde3/view
 
   ## Installation
 
